@@ -9,16 +9,28 @@
 # The function should return an decompressed version of the string where each 'char' of a group 
 # is repeated 'number' times consecutively. 
 # You may assume that the input string is well-formed according to the previously mentioned pattern.
-
+import gzip
 def decompress(s):
-    pass #TODO:
+    result = []
+    i = 0
+
+    while i < len(s):
+        if not s[i].isdigit():
+            result.append(s[i])
+            i += 1
+        else:
+            count = int(s[i])
+            letter = s[i + 1]
+            result.append(letter * count)
+            i += 2
+
+    return ''.join(result)
 
 
 
-
-# TEST CASES
-decompress("2c3a1t") # -> 'ccaaat'
-# decompress("4s2b") # -> 'ssssbb'
-# decompress("2p1o5p") # -> 'ppoppppp'
-# decompress("3n12e2z") # -> 'nnneeeeeeeeeeeezz'
-# decompress("127y") # -> 'yyyyyyyyyyyyyyyyyyyyyyyyyyyyyyyyyyyyyyyyyyyyyyyyyyyyyyyyyyyyyyyyyyyyyyyyyyyyyyyyyyyyyyyyyyyyyyyyyyyyyyyyyyyyyyyyyyyyyyyyyyyyyyy'
+# TEST CASE
+print(decompress("2c3a1t"))
+# print(decompress("4s2b") )# -> 'ssssbb'
+# print(decompress("2p1o5p")) # -> 'ppoppppp'
+# print(decompress("3n12e2z")) # -> 'nnneeeeeeeeeeeezz'
+# print(decompress("127y")) # -> 'yyyyyyyyyyyyyyyyyyyyyyyyyyyyyyyyyyyyyyyyyyyyyyyyyyyyyyyyyyyyyyyyyyyyyyyyyyyyyyyyyyyyyyyyyyyyyyyyyyyyyyyyyyyyyyyyyyyyyyyyyyyyyyy'

@@ -10,17 +10,31 @@
 # 't' should remain as 't'
 
 # You can assume that the input only contains alphabetic characters.
+# def compres(s):
 
 
 def compress(s):
-    pass # TODO:
+    s += '.'  # Add a sentinel character to ensure the last character is processed
+    result = []
+    i, j = 0, 0
+    while j < len(s):
+        if s[i] == s[j]:
+            j += 1
+        else:
+            letter_count = j - i
+            if letter_count == 1:
+                result.append(s[i])
+            else:
+                result.append(str(letter_count))
+                result.append(s[i])
+            i = j
+
+    return ''.join(result)
 
 
-
-
-# TEST CASES
-compress('ccaaatsss') # -> '2c3at3s'
+# TEST CASE
+print(compress('ccaaatsss'))  # Output: '2c3at3s'
 # compress('ssssbbz') # -> '4s2bz'
 # compress('ppoppppp') # -> '2po5p'
 # compress('nnneeeeeeeeeeeezz') # -> '3n12e2z'
-# compress('yyyyyyyyyyyyyyyyyyyyyyyyyyyyyyyyyyyyyyyyyyyyyyyyyyyyyyyyyyyyyyyyyyyyyyyyyyyyyyyyyyyyyyyyyyyyyyyyyyyyyyyyyyyyyyyyyyyyyyyyyyyyyyy');  # -> '127y'
+print(compress('yyyyyyyyyyyyyyyyyyyyyyyyyyyyyyyyyyyyyyyyyyyyyyyyyyyyyyyyyyyyyyyyyyyyyyyyyyyyyyyyyyyyyyyyyyyyyyyyyyyyyyyyyyyyyyyyyyyyyyyyyyyyyyy')) # -> '127y'
